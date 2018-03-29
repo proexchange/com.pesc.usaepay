@@ -26,9 +26,6 @@ function _civicrm_api3_usaepay_fetchtransactions_spec(&$spec) {
 function civicrm_api3_usaepay_fetchtransactions($params) {
   if (array_key_exists('sourcekey', $params)) {
 
-
-    watchdog('usaepay-apiparams','<pre>'.print_r($params,1).'</pre>');
-
     //for live server use 'www' for test server use 'sandbox'
     $wsdl='https://sandbox.usaepay.com/soap/gate/0AE595C1/usaepay.wsdl';
 
@@ -59,7 +56,6 @@ function civicrm_api3_usaepay_fetchtransactions($params) {
     );
 
     $recent = usaepay_recentFetchSuccess();
-    watchdog('usaepay-recent','<pre>'.print_r($recent,1).'</pre>');
 
     try { 
       // Create search parameter list 
@@ -74,32 +70,24 @@ function civicrm_api3_usaepay_fetchtransactions($params) {
           'Value'=>'0'),
       );
 
-
-    
       $start=0; 
       $limit=999; 
       $matchall=true; 
       $sort='created';
-
-      watchdog('usaepay-search','<pre>'.print_r($search,1).'</pre>');
 
       //RUN transaction search
       $res=$client->searchTransactions($token,$search,$matchall,$start,$limit,$sort); 
 
       //Make nice (non-object) array
       $resarray = json_decode(json_encode($res->Transactions), true);
-      watchdog('usaepay-results','<pre>'.print_r($resarray,1).'</pre>');
 
       //Get only relevant infomation
       $relevant = usaepay_getRelevant($resarray,$sourcename);
-      watchdog('usaepay-relevant','<pre>'.print_r($relevant,1).'</pre>');
 
       //look in CiviCRM for mathcing contribution, return only NEW payments not in DB
       $contributionsNew = usaepay_getNewContibutions($relevant);
-      watchdog('usaepay-new','<pre>'.print_r($contributionsNew,1).'</pre>');
 
       $contributionsAdded = usaepay_addRecurringContributionPayment($contributionsNew);
-      watchdog('usaepay-added','<pre>'.print_r($contributionsAdded,1).'</pre>');
 
       // Retrun results
       return civicrm_api3_create_success($contributionsAdded, $params, 'NewEntity', 'NewAction');
