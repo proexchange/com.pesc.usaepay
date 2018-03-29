@@ -1,6 +1,8 @@
 # USAePay Payments
 ## Description
-description of extension goes here
+- Adds the ability to use USAePay as a payment processor for credit cards and ACH/EFT
+- Supports one-time and recurring billing
+- Creates a scheduled job to download transactions from USAePay, for recurring billing, and adds as a contribution record to CiviCRM
 ## Installation / Configuration
 #### Prepare your USAePay account
 1. Login to your USAePay account
