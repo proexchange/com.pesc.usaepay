@@ -119,7 +119,7 @@ class CRM_Core_Payment_usaepay extends CRM_Core_Payment {
       $tran->gatewayurl = $paymentProcessor['url_recur'];
       $tran->addcustomer  = "yes";
       $tran->numleft  = $params['installments'];
-      $tran->start = date('Ymd');
+      $tran->start = 'next';
       $tran->custid = $params['contributionRecurID'];
       //recurring schedule
       switch ($params['frequency_unit']) {
