@@ -248,7 +248,7 @@ class umTransaction {
 
 
 	// Constructor
-	function __construct()
+	public function __construct()
 	{
 		// Set default values.
 		$this->command="sale";
@@ -834,7 +834,7 @@ class umTransaction {
 		<tr><th><b>Test</b></th><th><b>Result</b></th></tr>
 		<tr><td valign="Top">Checking PHP Version</td>
 		<td valign="top"><?php
-			if(version_compare(phpversion(),"4.3.0")) {
+			if(version_compare(phpversion(),"5.0.0")) {
 				?><font color="green">Ok</font><br>
 				PHP version <?php echo phpversion()?> on <?php echo PHP_OS?> detected.
 				<?php
