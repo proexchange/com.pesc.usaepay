@@ -174,7 +174,7 @@ class CRM_Core_Payment_usaepay extends CRM_Core_Payment {
    * @access public
    *
    */
-  function doPayment( &$params, $component = 'contribute' ) {
+  function doTransferCheckout( &$params, $component ) {
 
   }
 }
