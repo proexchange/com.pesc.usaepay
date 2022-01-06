@@ -27,10 +27,10 @@ function civicrm_api3_usaepay_fetchtransactions($params) {
   if (array_key_exists('sourcekey', $params)) {
 
     //for live server use 'www' for test server use 'sandbox'
-    $wsdl='https://sandbox.usaepay.com/soap/gate/0AE595C1/usaepay.wsdl';
+    $wsdl='https://secure.usaepay.com/soap/gate/0AE595C1/usaepay.wsdl';
 
     // instantiate SoapClient object as $client
-    $client = new SoapClient($wsdl);
+    $client = new SoapClient($wsdl, array( 'trace' => 1, 'exceptions' => 1 ));
 
     $sourcekey = $params['sourcekey'];
     $pin = $params['pin'];
