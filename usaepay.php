@@ -13,39 +13,12 @@ function usaepay_civicrm_config(&$config) {
 }
 
 /**
- * Implements hook_civicrm_xmlMenu().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
- */
-function usaepay_civicrm_xmlMenu(&$files) {
-  _usaepay_civix_civicrm_xmlMenu($files);
-}
-
-/**
  * Implements hook_civicrm_install().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
 function usaepay_civicrm_install() {
   _usaepay_civix_civicrm_install();
-}
-
-/**
- * Implements hook_civicrm_postInstall().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_postInstall
- */
-function usaepay_civicrm_postInstall() {
-  _usaepay_civix_civicrm_postInstall();
-}
-
-/**
- * Implements hook_civicrm_uninstall().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
- */
-function usaepay_civicrm_uninstall() {
-  _usaepay_civix_civicrm_uninstall();
 }
 
 /**
@@ -64,7 +37,6 @@ function usaepay_civicrm_enable() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
  */
 function usaepay_civicrm_disable() {
-  _usaepay_civix_civicrm_disable();
 
   //disable payment processors that use these payment processor types
   $paymentProcessors = civicrm_api3('PaymentProcessor', 'get', array(
@@ -74,16 +46,6 @@ function usaepay_civicrm_disable() {
   foreach ($paymentProcessors['values'] as $pp) {
     civicrm_api3('PaymentProcessor', 'create', array('id' => $pp['id'],'is_active' => 0));
   }
-}
-
-
-/**
- * Implements hook_civicrm_upgrade().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_upgrade
- */
-function usaepay_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _usaepay_civix_civicrm_upgrade($op, $queue);
 }
 
 /**
@@ -139,43 +101,7 @@ function usaepay_civicrm_managed(&$entities) {
     ),
   );
 
-  return _usaepay_civix_civicrm_managed($entities);
-}
-
-/**
- * Implements hook_civicrm_caseTypes().
- *
- * Generate a list of case-types.
- *
- * Note: This hook only runs in CiviCRM 4.4+.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
- */
-function usaepay_civicrm_caseTypes(&$caseTypes) {
-  _usaepay_civix_civicrm_caseTypes($caseTypes);
-}
-
-/**
- * Implements hook_civicrm_angularModules().
- *
- * Generate a list of Angular modules.
- *
- * Note: This hook only runs in CiviCRM 4.5+. It may
- * use features only available in v4.6+.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_angularModules
- */
-function usaepay_civicrm_angularModules(&$angularModules) {
-  _usaepay_civix_civicrm_angularModules($angularModules);
-}
-
-/**
- * Implements hook_civicrm_alterSettingsFolders().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
- */
-function usaepay_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _usaepay_civix_civicrm_alterSettingsFolders($metaDataFolders);
+  return;
 }
 
 // --- Functions below this ship commented out. Uncomment as required. ---
@@ -185,9 +111,8 @@ function usaepay_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
  *
-function usaepay_civicrm_preProcess($formName, &$form) {
 
-} // */
+ // */
 
 /**
  * Implements hook_civicrm_navigationMenu().
@@ -232,8 +157,6 @@ pin=0000 - optional'
     return false;
   }
 }
-
-
 
 /**
  * Perform CiviCRM API call to grab most recent successful Usaepay.Fetchtransactions
@@ -295,7 +218,6 @@ function usaepay_getRelevant($usaepayResults,$source=''){
   return $relevant;
 }
 
-
 /**
  * Perform search of civi for mathching contributions
  * return only NEW payments not yet entered in CiviCRM
@@ -315,7 +237,6 @@ function usaepay_getNewContibutions($relevant){
   }
   return $contributionsNew;
 }
-
 
 /**
  * Accepts array of NEW Payments 
@@ -353,10 +274,3 @@ function usaepay_addRecurringContributionPayment($contributionsNew){
   }
   return $contributionsAdded;
 }
-
-
-
-
-
-
-
