@@ -1196,14 +1196,6 @@ class umTransaction {
 
 		//init the connection
 		$ch = curl_init($url);
-		if(!is_resource($ch))
-		{
-			$this->result="Error";
-			$this->resultcode="E";
-			$this->error="Library Error: Unable to initialize CURL";
-			$this->errorcode=10131;
-			return false;
-		}
 
 		// set some options for the connection
 		curl_setopt($ch,CURLOPT_HEADER, 1);
