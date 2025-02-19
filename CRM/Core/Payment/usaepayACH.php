@@ -144,8 +144,8 @@ class CRM_Core_Payment_usaepayACH extends CRM_Core_Payment {
       print_r($params);
       echo "<br><br><strong>TRAN</strong><br>";
       print_r($tran);
-      echo "</pre>";  
-      die();    
+      echo "</pre>";
+      die();
     }
 
 
@@ -181,7 +181,8 @@ class CRM_Core_Payment_usaepayACH extends CRM_Core_Payment {
    * @access public
    *
    */
-  function doTransferCheckout( &$params, $component ) {
+  public function doTransferCheckout(&$params, $component = 'contribute') {
 
   }
+
 }
