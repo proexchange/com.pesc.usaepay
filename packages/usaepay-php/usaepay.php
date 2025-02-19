@@ -1200,7 +1200,7 @@ class umTransaction {
 		{
 			$this->result="Error";
 			$this->resultcode="E";
-			$this->error="Libary Error: Unable to initialize CURL ($ch)";
+			$this->error="Library Error: Unable to initialize CURL";
 			$this->errorcode=10131;
 			return false;
 		}
