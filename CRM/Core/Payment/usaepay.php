@@ -82,8 +82,8 @@ class CRM_Core_Payment_usaepay extends CRM_Core_Payment {
       $params['billing_middle_name'],
       $params['billing_last_name']
     );
-    $exp_month = str_pad(((string) $params['credit_card_exp_date']['M']), 2, 0, STR_PAD_LEFT);
-    $exp_year = substr(((string) $params['credit_card_exp_date']['Y']), -2);
+    $exp_year = substr($params['year'], 2, 2);
+    $exp_month = sprintf('%02d', (int) $params['month']);
 
     $tran = new umTransaction;
 
